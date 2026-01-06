@@ -1,9 +1,8 @@
 # Reception Register
 
-Esse projeto é uma aplicação web simples para registrar visitantes em uma recepção. Ele permite que os usuários insiram seus nomes e horários de chegada, armazenando essas informações em um banco de dados SQLite.
+Esse projeto é uma aplicação console simples para registrar visitantes em uma recepção. Ele permite que os usuários insiram seus nomes, data de nascimento, telefone, email, e endereço. O armazenando dessas informações ocorre em um file txt.
 
 ## Funcionalidades
 
-- Formulário para registrar o nome do visitante e o horário de chegada.
-- Armazenamento dos dados em um banco de dados txt.
-- Arquivo txt para exibir a lista de visitantes registrados.
+- Formulário para registrar os dados dos visitantes.
+- Armazenamento dos dados em um file txt.
