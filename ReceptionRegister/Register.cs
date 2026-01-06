@@ -1,0 +1,95 @@
+﻿namespace ReceptionRegister;
+
+public class Register
+{
+    public string Name;
+    public DateTime Birthday;
+    public string Telephone;
+    public string Email;
+    public string Address;
+
+    public static void DisplayMenu()
+    {
+        Console.Clear();
+        Console.WriteLine("--------------- RECEPTION REGISTER ---------------");
+        Console.WriteLine("\n1 - Register New User");
+        Console.WriteLine("2 - View Users");
+        Console.WriteLine("0 - Leave");
+        Console.Write("\nSelect an option: ");
+    }
+
+    public static void AddNewUser(List<Register> listOfUser)
+    {
+        Register newUser = new Register();
+        Console.Clear();
+        Console.WriteLine("--------------- REGISTER OF USERS ---------------\n");
+
+        Console.Write("Full Name: ");
+        newUser.Name = Console.ReadLine();
+
+        bool validDate = false;
+        while (!validDate)
+        {
+            Console.Write("Birthday (dd/mm/yyyy): ");
+            if (DateTime.TryParse(Console.ReadLine(), out DateTime result))
+            {
+                newUser.Birthday = result;
+                validDate = true;
+            }
+            else Console.WriteLine("Invalid date!");
+        }
+
+        Console.Write("Telephone: ");
+        newUser.Telephone = Console.ReadLine();
+        Console.Write("Email: ");
+        newUser.Email = Console.ReadLine();
+        Console.Write("Address: ");
+        newUser.Address = Console.ReadLine();
+
+        listOfUser.Add(newUser);
+
+        Console.Write("\nSuccess! Press Enter to return: ");
+        Console.ReadKey();
+    }
+
+    public static void ViewAllUsers(List<Register> listOfUser)
+    {
+        Console.Clear();
+        Console.WriteLine("--------------- LIST OF USERS ---------------");
+        if (listOfUser.Count == 0)
+        {
+            Console.WriteLine("\nNo users found!");
+        }
+        else
+        {
+            foreach (var user in listOfUser)
+            {
+                Console.WriteLine($"\nFull Name: {user.Name}");
+                Console.WriteLine($"Birthday: {user.Birthday.ToShortDateString()}");
+                Console.WriteLine($"Telephone: {user.Telephone}");
+                Console.WriteLine($"Email: {user.Email}");
+                Console.WriteLine($"Address: {user.Address}");
+                Console.WriteLine("\n---------------------------------------------\n");
+            }
+        }
+        Console.Write("\nPress Enter to return: ");
+        Console.ReadKey();
+    }
+
+    public static void SaveFile(List<Register> listOfUser)
+    {
+        string path = @"C:\Users\Vinic\Downloads\Curso C#\Cadastro de Recepção\";
+        string fileName = "File.txt";
+        string filepath = path + fileName;
+
+        List<string> textToFile = new List<string>();
+
+        foreach(Register user in listOfUser)
+        {
+            string line = $"Name: {user.Name}; Birthday: {user.Birthday.ToShortDateString()}; Telephone: {user.Telephone}; Email: {user.Email}; Address: {user.Address}; ";
+            textToFile.Add(line);
+        }
+
+        File.AppendAllLines(filepath, textToFile);
+    }
+}
